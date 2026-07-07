@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>安南风俗志 · 观察越南社会，记录风土人情</title>
+    <meta name="description" content="安南风俗志——一个观察并评论越南社会现象的独立网站，记录风土人情、社会观察与文化常识。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+      /* ===== 防御性底模 ===== */
+      *, *::before, *::after { box-sizing: border-box; }
+      img, video { max-width: 100%; height: auto; display: block; }
+      body { overflow-wrap: break-word; }
+
+      /* ===== 设计变量 ===== */
+      :root {
+        --ink:        hsl(150, 25%, 18%);   /* 深墨绿：主文字、标题 */
+        --ink-soft:   hsl(150, 18%, 32%);   /* 次文字 */
+        --ink-muted:  hsl(30, 8%, 45%);     /* 辅助文字 */
+        --paper:      hsl(40, 36%, 96%);    /* 米白底 */
+        --paper-2:    hsl(42, 40%, 92%);    /* 米白偏深，卡片底 */
+        --paper-3:    hsl(44, 35%, 88%);    /* 分隔、边框 */
+        --earth:      hsl(28, 45%, 38%);    /* 暖棕：强调、链接 */
+        --earth-soft: hsl(28, 35%, 55%);
+        --accent:     hsl(150, 28%, 28%);   /* 深墨绿强调 */
+        --gold:       hsl(38, 55%, 52%);    /* 装饰金线 */
+
+        --serif:  "Noto Serif SC", "Songti SC", "SimSun", "STSong", serif;
+        --sans:   "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+
+        --max-w: 1120px;
+        --radius: 4px;
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: var(--serif);
+        background: var(--paper);
+        color: var(--ink);
+        line-height: 1.75;
+        font-size: 16px;
+        /* 米纸纹理：极淡的噪点感 */
+        background-image:
+          radial-gradient(circle at 20% 10%, hsla(38, 50%, 60%, 0.08) 0, transparent 40%),
+          radial-gradient(circle at 80% 90%, hsla(150, 20%, 30%, 0.06) 0, transparent 45%);
+        background-attachment: fixed;
+      }
+
+      a { color: var(--earth); text-decoration: none; transition: color .2s ease; }
+      a:hover { color: var(--ink); }
+
+      /* ===== 顶部导航 ===== */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: hsla(40, 36%, 96%, 0.92);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--paper-3);
+      }
+      .nav-inner {
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 18px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .brand {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        font-family: var(--serif);
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--ink);
+        letter-spacing: 0.08em;
+      }
+      .brand .seal {
+        display: inline-block;
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+        background: var(--earth);
+        color: var(--paper);
+        font-size: 14px;
+        font-weight: 700;
+        border-radius: 2px;
+        letter-spacing: 0;
+        transform: translateY(2px);
+      }
+      .nav-list {
+        display: flex;
+        gap: 32px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-family: var(--serif);
+        font-size: 15px;
+      }
+      .nav-list a {
+        color: var(--ink-soft);
+        position: relative;
+        padding: 4px 0;
+      }
+      .nav-list a:hover { color: var(--earth); }
+      .nav-list a::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 0;
+        height: 1px;
+        background: var(--earth);
+        transition: all .25s ease;
+        transform: translateX(-50%);
+      }
+      .nav-list a:hover::after { width: 100%; }
+
+      /* ===== Hero ===== */
+      .hero {
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 96px 32px 80px;
+        text-align: center;
+        position: relative;
+      }
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .hero::before { top: 64px; }
+      .hero::after  { bottom: 48px; }
+
+      .hero h1 {
+        font-family: var(--serif);
+        font-weight: 700;
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        color: var(--ink);
+        letter-spacing: 0.15em;
+        margin: 0 0 16px;
+        line-height: 1.3;
+      }
+      .hero .subtitle {
+        font-family: var(--serif);
+        font-size: clamp(1rem, 2vw, 1.25rem);
+        color: var(--earth);
+        letter-spacing: 0.3em;
+        margin: 0 0 32px;
+        font-weight: 500;
+      }
+      .hero .intro {
+        max-width: 640px;
+        margin: 0 auto;
+        color: var(--ink-soft);
+        font-size: 1rem;
+        line-height: 2;
+        text-align: justify;
+        text-indent: 2em;
+      }
+
+      /* ===== 通用板块 ===== */
+      section.block {
+        max-width: var(--max-w);
+        margin: 0 auto;
+        padding: 64px 32px;
+      }
+      .section-head {
+        text-align: center;
+        margin-bottom: 48px;
+        position: relative;
+      }
+      .section-head h2 {
+        font-family: var(--serif);
+        font-weight: 600;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        color: var(--ink);
+        letter-spacing: 0.12em;
+        margin: 0 0 12px;
+      }
+      .section-head .en {
+        font-family: var(--sans);
+        font-size: 0.8rem;
+        color: var(--ink-muted);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        font-weight: 300;
+      }
+      .section-head .deco {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .section-head .deco span {
+        width: 40px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .section-head .deco i {
+        width: 6px;
+        height: 6px;
+        background: var(--earth);
+        border-radius: 50%;
+        font-style: normal;
+      }
+
+      /* ===== 社会观察 - 文章卡片 ===== */
+      .articles {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      .article-card {
+        background: var(--paper-2);
+        border: 1px solid var(--paper-3);
+        border-radius: var(--radius);
+        padding: 28px 24px;
+        display: flex;
+        flex-direction: column;
+        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+        position: relative;
+      }
+      .article-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 24px;
+        right: 24px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        opacity: 0;
+        transition: opacity .3s ease;
+      }
+      .article-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px -16px hsla(150, 25%, 18%, 0.18);
+        border-color: var(--gold);
+      }
+      .article-card:hover::before { opacity: 1; }
+
+      .article-card .date {
+        font-family: var(--sans);
+        font-size: 0.8rem;
+        color: var(--ink-muted);
+        letter-spacing: 0.05em;
+        margin-bottom: 12px;
+      }
+      .article-card h3 {
+        font-family: var(--serif);
+        font-weight: 600;
+        font-size: 1.15rem;
+        color: var(--ink);
+        margin: 0 0 12px;
+        line-height: 1.55;
+        letter-spacing: 0.04em;
+      }
+      .article-card p {
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        line-height: 1.8;
+        margin: 0 0 20px;
+        flex: 1;
+      }
+      .article-card .read-more {
+        font-family: var(--serif);
+        font-size: 0.9rem;
+        color: var(--earth);
+        letter-spacing: 0.1em;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .article-card .read-more::after {
+        content: "→";
+        transition: transform .2s ease;
+      }
+      .article-card:hover .read-more::after { transform: translateX(4px); }
+
+      /* ===== 常识介绍 - 重点板块 ===== */
+      .knowledge-wrap {
+        background: var(--paper-2);
+        border-top: 1px solid var(--paper-3);
+        border-bottom: 1px solid var(--paper-3);
+      }
+      .knowledge-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+      .knowledge-card {
+        background: var(--paper);
+        border: 1px solid var(--paper-3);
+        border-radius: var(--radius);
+        padding: 32px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .knowledge-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--earth);
+      }
+      .knowledge-card .k-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px dashed var(--paper-3);
+      }
+      .knowledge-card .k-icon {
+        width: 44px;
+        height: 44px;
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        background: var(--paper-2);
+        border: 1px solid var(--paper-3);
+        border-radius: 50%;
+        color: var(--earth);
+        font-size: 20px;
+      }
+      .knowledge-card h3 {
+        font-family: var(--serif);
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: var(--ink);
+        margin: 0 0 2px;
+        letter-spacing: 0.08em;
+      }
+      .knowledge-card .k-sub {
+        font-family: var(--sans);
+        font-size: 0.75rem;
+        color: var(--ink-muted);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        font-weight: 300;
+      }
+      .knowledge-card h4 {
+        font-family: var(--serif);
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--accent);
+        margin: 18px 0 8px;
+        letter-spacing: 0.05em;
+      }
+      .knowledge-card h4:first-of-type { margin-top: 0; }
+      .knowledge-card p {
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        line-height: 1.85;
+        margin: 0 0 8px;
+        text-align: justify;
+      }
+      .knowledge-card ul {
+        margin: 4px 0 8px;
+        padding-left: 20px;
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        line-height: 1.85;
+      }
+      .knowledge-card li { margin-bottom: 4px; }
+      .knowledge-card .phrase {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 6px 0;
+        border-bottom: 1px dotted var(--paper-3);
+        font-size: 0.95rem;
+      }
+      .knowledge-card .phrase:last-child { border-bottom: none; }
+      .knowledge-card .phrase .vi {
+        font-family: var(--serif);
+        color: var(--earth);
+        font-style: italic;
+      }
+      .knowledge-card .phrase .zh {
+        color: var(--ink-soft);
+      }
+
+      /* ===== 页脚 ===== */
+      .site-footer {
+        background: var(--ink);
+        color: hsla(40, 36%, 96%, 0.75);
+        padding: 48px 32px 28px;
+        margin-top: 32px;
+      }
+      .footer-inner {
+        max-width: var(--max-w);
+        margin: 0 auto;
+        text-align: center;
+      }
+      .footer-brand {
+        font-family: var(--serif);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--paper);
+        letter-spacing: 0.15em;
+        margin-bottom: 12px;
+      }
+      .footer-desc {
+        font-family: var(--sans);
+        font-size: 0.85rem;
+        line-height: 1.8;
+        max-width: 520px;
+        margin: 0 auto 24px;
+        color: hsla(40, 36%, 96%, 0.6);
+        font-weight: 300;
+      }
+      .footer-divider {
+        width: 40px;
+        height: 1px;
+        background: var(--gold);
+        margin: 0 auto 20px;
+      }
+      .footer-copy {
+        font-family: var(--sans);
+        font-size: 0.75rem;
+        color: hsla(40, 36%, 96%, 0.4);
+        letter-spacing: 0.1em;
+        font-weight: 300;
+      }
+
+      /* ===== 响应式 ===== */
+      @media (max-width: 900px) {
+        .articles { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 768px) {
+        .nav-inner {
+          padding: 14px 20px;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .nav-list { gap: 20px; font-size: 14px; }
+        .brand { font-size: 20px; }
+        .hero { padding: 64px 20px 56px; }
+        .hero::before { top: 40px; }
+        .hero::after  { bottom: 32px; }
+        section.block { padding: 48px 20px; }
+        .articles { grid-template-columns: 1fr; gap: 20px; }
+        .knowledge-grid { grid-template-columns: 1fr; gap: 20px; }
+        .knowledge-card { padding: 24px 20px; }
+        .site-footer { padding: 36px 20px 20px; }
+      }
+      @media (max-width: 480px) {
+        .nav-list { gap: 14px; font-size: 13px; }
+        .hero h1 { letter-spacing: 0.1em; }
+        .hero .subtitle { letter-spacing: 0.2em; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ===== 顶部导航 ===== -->
+    <header class="site-header">
+      <div class="nav-inner">
+        <a href="#top" class="brand">
+          <span class="seal">安</span>
+          <span>安南风俗志</span>
+        </a>
+        <nav>
+          <ul class="nav-list">
+            <li><a href="#top">首页</a></li>
+            <li><a href="#observation">社会观察</a></li>
+            <li><a href="#knowledge">常识介绍</a></li>
+            <li><a href="#about">关于我们</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+
+      <!-- ===== Hero ===== -->
+      <section class="hero">
+        <h1>安南风俗志</h1>
+        <p class="subtitle">观察越南社会 · 记录风土人情</p>
+        <p class="intro">
+          安南，古为交趾之地，今为越南社会主义共和国。这片呈 S 形狭长的国土，北接中华，南濒暹罗湾，东望南海。从红河三角洲的稻浪，到中部山地的云雾，再到湄公河三角洲的水网，九千多万民众在此生息劳作，延续着千年不断的文化脉络。本志以独立之视角、沉静之笔调，观察越南社会的变迁与日常，记录风土人情的温度与肌理。
+        </p>
+      </section>
+
+      <!-- ===== 社会观察 ===== -->
+      <section class="block" id="observation">
+        <div class="section-head">
+          <h2>社会观察</h2>
+          <div class="en">Social Observations</div>
+          <div class="deco"><span></span><i></i><span></span></div>
+        </div>
+
+        <div class="articles">
+
+          <article class="article-card">
+            <div class="date">二〇二六年六月十八日</div>
+            <h3>摩托车洪流中的胡志明市：速度与秩序的微妙平衡</h3>
+            <p>
+              在胡志明市的街头，摩托车是绝对的主角。清晨七点，数以十万计的骑手从城郊涌向市中心，汇成一条钢铁与引擎的河流。然而在这看似混乱的洪流之中，却蕴含着一种当地人习以为常、外人难以理解的秩序感——没有鸣笛催促，没有强行并线，每辆车都在以一种默契的节奏向前流动。
+            </p>
+          </article>
+
+          <article class="article-card">
+            <div class="date">二〇二六年五月二十七日</div>
+            <h3>咖啡文化与越南式慢生活：从滴滴壶说起</h3>
+            <p>
+              越南是世界第二大咖啡出口国，但其本土的咖啡文化却鲜为外人所知。一只铝制滴滴壶、一杯冰块、一勺炼乳，构成了越南咖啡的全部。在河内的老城区，清晨的咖啡馆坐满了看报的老人和谈生意的中年人，他们可以在一杯咖啡旁消磨一整个上午，时间在这里仿佛被拉长了。
+            </p>
+          </article>
+
+          <article class="article-card">
+              <div class="date">二〇二六年四月十五日</div>
+            <h3>越南京族姓氏现象：阮姓为何占总人口近四成？</h3>
+            <p>
+              越南有超过百分之三十八的人口姓阮，这一比例在世界主要国家中极为罕见。追溯其根源，既有历史上王朝更迭时百姓改姓避祸的因素，也有陈朝、黎朝等朝代赐姓的传统，更与近代法国殖民时期户籍登记制度的推行密切相关。姓氏背后，是一部浓缩的越南社会史。
+            </p>
+          </article>
+
+          <article class="article-card">
+            <div class="date">二〇二六年三月二日</div>
+            <h3>从奥黛到筒裙：越南女性服饰的传统与现代</h3>
+            <p>
+              奥黛（Áo Dài）被誉为越南的国服，其贴身剪裁与两侧开叉的设计，既展现了女性的体态之美，又不失端庄含蓄。然而在当代越南，奥黛早已不是日常穿着，而更多出现在婚礼、毕业典礼、节庆等正式场合。年轻一代的越南女性，正在用自己的方式重新诠释这一传统服饰的当代意义。
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ===== 常识介绍 ===== -->
+      <div class="knowledge-wrap">
+        <section class="block" id="knowledge">
+          <div class="section-head">
+            <h2>常识介绍</h2>
+            <div class="en">Essential Knowledge</div>
+            <div class="deco"><span></span><i></i><span></span></div>
+          </div>
+
+          <div class="knowledge-grid">
+
+            <!-- 地理与人口 -->
+            <article class="knowledge-card">
+              <div class="k-head">
+                <div class="k-icon">⛰</div>
+                <div>
+                  <h3>地理与人口</h3>
+                  <div class="k-sub">Geography &amp; Population</div>
+                </div>
+              </div>
+
+              <h4>国土概况</h4>
+              <p>
+                越南位于中南半岛东部，国土呈南北狭长的 S 形，南北长约一千六百五十公里，东西最窄处仅约五十公里。北与中国接壤，西与老挝、柬埔寨交界，东、南两面濒临南海（越南称东海）。全国面积约三十三点一万平方公里，略小于中国云南省。
+              </p>
+
+              <h4>主要城市</h4>
+              <ul>
+                <li><strong>河内（Hà Nội）</strong>：首都，位于北部红河三角洲，是越南的政治、文化中心，拥有逾千年建城史。</li>
+                <li><strong>胡志明市（Thành phố Hồ Chí Minh）</strong>：旧称西贡，全国最大城市与经济中心，位于南部湄公河三角洲东北缘。</li>
+                <li><strong>岘港（Đà Nẵng）</strong>：中部最大港口城市，是连接南北的交通枢纽。</li>
+                <li><strong>顺化（Huế）</strong>：阮朝古都，以皇城、香江和陵寝群闻名于世。</li>
+                <li><strong>会安（Hội An）</strong>：中部古城，曾是重要贸易港口，今为世界文化遗产。</li>
+              </ul>
+
+              <h4>人口分布</h4>
+              <p>
+                越南总人口约九千九百万（二〇二五年数据），居世界第十五位。人口分布极不均衡，北部红河三角洲与南部湄公河三角洲是两大人口密集区，合计承载全国近六成人口。京族（越族）占总人口的百分之八十六以上，其余为岱依族、泰族、芒族、高棉族、华族等五十四个少数民族。
+              </p>
+            </article>
+
+            <!-- 历史文化 -->
+            <article class="knowledge-card">
+              <div class="k-head">
+                <div class="k-icon">📜</div>
+                <div>
+                  <h3>历史文化</h3>
+                  <div class="k-sub">History &amp; Culture</div>
+                </div>
+              </div>
+
+              <h4>历史简述</h4>
+              <p>
+                越南历史悠久，传说时期有鸿庞氏、安阳王等记载。公元前一一一年，汉武帝平南越国，设交趾、九真、日南三郡，开启了长达千余年的"北属时期"。公元九六八年，丁部领建立丁朝，越南正式独立。此后历经李朝、陈朝、黎朝、阮朝等封建王朝，形成了独特的"小中华"文化圈。
+              </p>
+              <p>
+                十九世纪中叶，法国逐步侵占越南，至一八八五年正式沦为法国殖民地。一九四五年九月二日，胡志明在河内巴亭广场宣读《独立宣言》，建立越南民主共和国。经过抗法、抗美两场长期战争，一九七五年南北统一，一九七六年更名为越南社会主义共和国。一九八六年实行"革新开放"（Đổi Mới），逐步走上市场经济道路。
+              </p>
+
+              <h4>主要节日</h4>
+              <ul>
+                <li><strong>春节（Tết Nguyên Đán）</strong>：越南最重要的传统节日，与中国春节时间相同，习俗也多有相似——贴春联、办年货、守岁、拜年、吃粽子。</li>
+                <li><strong>清明节（Tết Thanh Minh）</strong>：祭祖扫墓的节日，在农历三月初。</li>
+                <li><strong>端午节（Tết Đoan Ngọ）</strong>：农历五月初五，又称杀虫节，有吃粽子、驱虫的习俗。</li>
+                <li><strong>中秋节（Tết Trung Thu）</strong>：农历八月十五，以儿童提灯游园、吃月饼为特色，是越南的"儿童节"。</li>
+                <li><strong>国庆日（Ngày Quốc khánh）</strong>：九月二日，纪念一九四五年独立宣言发表。</li>
+              </ul>
+
+              <h4>文化习俗</h4>
+              <p>
+                越南文化深受儒家思想、佛教与道教影响，同时保留了本土的母神崇拜（Đạo Mẫu）等民间信仰。家庭观念浓厚，宗族关系紧密。"敬老"是社会伦理的核心价值之一，见面时习惯以年龄称呼对方（如"哥""姐""叔""伯"），而非直呼其名。
+              </p>
+            </article>
+
+            <!-- 语言文字 -->
+            <article class="knowledge-card">
+              <div class="k-head">
+                <div class="k-icon">✒</div>
+                <div>
+                  <h3>语言文字</h3>
+                  <div class="k-sub">Language &amp; Script</div>
+                </div>
+              </div>
+
+              <h4>越南语特点</h4>
+              <p>
+                越南语（Tiếng Việt）是越南的官方语言，属南亚语系越芒语族（一说汉藏语系，学界尚有争议）。越南语是声调语言，共有六个声调，同一音节因声调不同而含义迥异，这也是初学者最大的难点之一。
+              </p>
+              <p>
+                历史上，越南长期使用汉字（称"儒字"Chữ Nho）作为官方文字，并在此基础上创造了本土的喃字（Chữ Nôm）。十七世纪，法国传教士亚历山德罗（Alexandre de Rhodes）等人创制了以拉丁字母为基础的国语字（Chữ Quốc ngữ），经法国殖民时期推广，于二十世纪初成为越南的通用文字。
+              </p>
+              <p>
+                现代越南语词汇中，汉越词（源自汉语的借词）约占总词汇量的百分之六十至七十，涉及政治、文化、科技等诸多领域，与粤语、闽南语等南方汉语方言在读音上有不少对应之处。
+              </p>
+
+              <h4>常用问候语</h4>
+              <div class="phrase"><span class="vi">Xin chào</span><span class="zh">你好</span></div>
+              <div class="phrase"><span class="vi">Cảm ơn</span><span class="zh">谢谢</span></div>
+              <div class="phrase"><span class="vi">Xin lỗi</span><span class="zh">对不起</span></div>
+              <div class="phrase"><span class="vi">Tạm biệt</span><span class="zh">再见</span></div>
+              <div class="phrase"><span class="vi">Bạn khỏe không?</span><span class="zh">你好吗？</span></div>
+              <div class="phrase"><span class="vi">Tôi khỏe, cảm ơn</span><span class="zh">我很好，谢谢</span></div>
+              <div class="phrase"><span class="vi">Bao nhiêu tiền?</span><span class="zh">多少钱？</span></div>
+            </article>
+
+            <!-- 饮食文化 -->
+            <article class="knowledge-card">
+              <div class="k-head">
+                <div class="k-icon">🍜</div>
+                <div>
+                  <h3>饮食文化</h3>
+                  <div class="k-sub">Culinary Culture</div>
+                </div>
+              </div>
+
+              <h4>越南菜的特点</h4>
+              <p>
+                越南菜以清爽、鲜香、酸辣平衡著称，注重食材本味与香草的运用。鱼露（nước mắm）是越南料理的灵魂调料，几乎所有菜肴都离不开它。新鲜香草如罗勒、薄荷、芫荽、香茅、紫苏等，常以生菜形式直接搭配主菜食用。
+              </p>
+              <p>
+                越南饮食讲究"五味调和"——酸、甜、咸、辣、苦相互平衡，同时注重五色（白、绿、黄、红、黑）的视觉搭配。从北到南，口味由清淡逐渐转向浓郁甜鲜，南部因物产丰饶，菜肴中糖和椰奶的使用更为普遍。
+              </p>
+
+              <h4>特色美食</h4>
+              <ul>
+                <li><strong>越南河粉（Phở）</strong>：国民主食，以牛骨汤头、米粉、牛肉或鸡肉为主料，搭配香草、青柠、辣椒食用。北派清鲜，南派浓郁。</li>
+                <li><strong>法棍三明治（Bánh mì）</strong>：法越文化交融的代表，酥脆的法棍内夹猪肉、肝酱、腌萝卜、香菜、辣椒，是最受欢迎的街头小吃之一。</li>
+                <li><strong>春卷（Gỏi cuốn / Chả giò）</strong>：分生春卷（米纸卷，蘸鱼露）和炸春卷两种，前者清爽，后者香脆。</li>
+                <li><strong>越式咖啡（Cà phê sữa đá）</strong>：以滴滴壶慢滴萃取，加炼乳和冰块，甜苦交织，是越南日常生活的象征。</li>
+                <li><strong>甘蔗虾（Chạo tôm）</strong>：虾泥裹在甘蔗段上炸制，蘸鱼露食用，鲜甜交融。</li>
+                <li><strong>糯米饭（Xôi）</strong>：以糯米蒸制，可甜可咸，是越南人常见的早餐选择。</li>
+              </ul>
+
+              <h4>饮食习惯</h4>
+              <p>
+                越南人一日三餐，早餐多为河粉、糯米饭或法棍，午餐与晚餐以米饭为主食，搭配多道菜肴共享。越南人习惯用筷子和勺子，汤碗直接端起饮用。家庭用餐时，晚辈需等长辈先动筷，以示尊敬。
+              </p>
+            </article>
+
+            <!-- 社会生活 -->
+            <article class="knowledge-card">
+              <div class="k-head">
+                <div class="k-icon">🏮</div>
+                <div>
+                  <h3>社会生活</h3>
+                  <div class="k-sub">Social Life</div>
+                </div>
+              </div>
+
+              <h4>日常生活</h4>
+              <p>
+                越南人的生活节奏兼具东南亚的悠闲与东亚的勤勉。清晨是城市最热闹的时段——公园和湖边有练太极、跳广场舞的人群，街边的米粉摊和咖啡档坐满了食客。午后是一天中最炎热的时候，许多小店会关门休息两三个小时，直到傍晚才重新营业。
+              </p>
+              <p>
+                家庭在越南社会中占据核心地位，三代同堂的家庭仍很普遍。周末和节假日，举家出游、走亲访友是常见的休闲方式。越南人普遍信仰佛教（大乘佛教为主），同时也供奉祖先、祭拜土地神和城隍，民间信仰与制度化宗教并行不悖。
+              </p>
+
+              <h4>交通方式</h4>
+              <ul>
+                <li><strong>摩托车</strong>：最主要的交通工具，全国摩托车保有量远超汽车。在河内和胡志明市，摩托车洪流是街头标志性景观。</li>
+                <li><strong>出租车与网约车</strong>：主要城市出租车普及，Grab 等网约车应用广泛使用，价格相对低廉。</li>
+                <li><strong>公共汽车</strong>：各大城市均有公交系统，但线路覆盖和准点率有限。</li>
+                <li><strong>铁路</strong>：南北铁路（统一铁路）贯穿全境，从河内到胡志明市约需三十小时，是体验沿途风光的经典路线。</li>
+                <li><strong>航空</strong>：国内航线连接主要城市，越航、越捷、越竹等航空公司竞争激烈，机票价格亲民。</li>
+              </ul>
+
+              <h4>社交礼仪</h4>
+              <p>
+                越南人见面时的传统礼节是握手，部分地区也有合十礼的遗存。在称呼上，越南人习惯按年龄和辈分使用亲属称谓（anh 哥、chị 姐、chú 叔、bác 伯等），即使是陌生人之间也如此，这体现了越南社会浓厚的宗法伦理色彩。
+              </p>
+              <p>
+                做客时，应脱鞋入室，携带水果或茶叶作为小礼物是得体的做法。用餐时需等长辈先入座、先动筷。递物给长辈应用双手。在寺庙和宗教场所，应着装庄重，避免暴露肩膀和膝盖。
+              </p>
+            </article>
+
+          </div>
+        </section>
+      </div>
+
+      <!-- ===== 关于我们 ===== -->
+      <section class="block" id="about">
+        <div class="section-head">
+          <h2>关于我们</h2>
+          <div class="en">About Us</div>
+          <div class="deco"><span></span><i></i><span></span></div>
+        </div>
+
+        <div style="max-width: 720px; margin: 0 auto; text-align: center;">
+          <p style="color: var(--ink-soft); font-size: 1rem; line-height: 2; text-align: justify; text-indent: 2em; margin: 0 0 20px;">
+            安南风俗志由一群长期关注越南社会与文化的独立作者共同维护。我们中有旅居越南多年的观察者，有研究东南亚历史的学者，也有热爱越南文化的普通读者。我们相信，了解一个国家，不仅要看它的政治与经济，更要看它的日常与烟火——街头的一碗河粉、巷口的一杯咖啡、婚礼上的一袭奥黛，皆是文化的注脚。
+          </p>
+          <p style="color: var(--ink-soft); font-size: 1rem; line-height: 2; text-align: justify; text-indent: 2em; margin: 0;">
+            本志不依附于任何机构，不参与任何利益代言，唯以诚恳之笔，记录一个真实而立体的越南。若您对越南有独特的观察与思考，欢迎与我们交流。
+          </p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===== 页脚 ===== -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">安南风俗志</div>
+        <p class="footer-desc">
+          观察越南社会，记录风土人情。<br />
+          以独立之视角，书写这片 S 形国土上的日常与变迁。
+        </p>
+        <div class="footer-divider"></div>
+        <div class="footer-copy">
+          © 二〇二六年 安南风俗志 An Nam Customs Journal · 保留所有权利
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
